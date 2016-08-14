@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'webmock/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -42,4 +43,17 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # stub http requests
+  canned_404 = File.read "#{Rails.root}/spec/support/canned_404.json"
+  canned_200 = File.read "#{Rails.root}/spec/support/canned_200.json"
+  $deployment_id = SecureRandom.uuid
+
+  config.before(:example, stub_api: true) do
+    stub_request(:get, /#{ENV['API_URL']}\/deployments\/\d+/).
+      to_return(canned_404)
+
+    stub_request(:get, "#{ENV['API_URL']}/deployments/#{$deployment_id}").
+      to_return(canned_200)
+  end
 end

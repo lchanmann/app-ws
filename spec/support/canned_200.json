@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK 
+Connection: keep-alive
+Content-Type: application/json
+Content-Length: 140
+Server: WEBrick/1.3.1 (Ruby/2.0.0/2015-04-13)
+Date: Sun, 14 Aug 2016 20:09:57 GMT
+Via: 1.1 vegur
+
+{"id":1234,"name":"funky-deployment-9","account_id":1337,"host":"localhost","port":6432,"username":null,"password":null,"type":"postgresql"}
