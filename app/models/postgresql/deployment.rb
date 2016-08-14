@@ -8,6 +8,8 @@ class PostgreSQL::Deployment < Deployment
       password: password,
       dbname: db_name
     })
+  rescue PG::ConnectionBad
+    raise Errors::NotFound, "Database not found."
   end
 
   def databases
