@@ -22,8 +22,10 @@ class ApplicationController < ActionController::Base
     session[:account_id] = 1337
   end
 
-  def deployment_not_found
-    render status: :not_found
+  def deployment_not_found exception
+    render "errors/deployment_not_found", layout: 'megatron/errors',
+      locals: { message: exception.message },
+      status: :not_found
   end
 
 end
