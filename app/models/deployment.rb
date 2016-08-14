@@ -14,6 +14,7 @@ class Deployment
   def self.find(id)
     response = Faraday.get("#{ENV['API_URL']}/deployments/#{id}")
     body = JSON.parse(response.body)
+    raise Errors::NotFound, body['error'] unless response.success?
     class_by_type(body['type']).new(body)
   end
 

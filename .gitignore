@@ -13,3 +13,5 @@
 /tmp
 
 pg_data
+*.swp
+.byebug_history

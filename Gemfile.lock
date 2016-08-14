@@ -44,7 +44,8 @@ GEM
     block_helpers (0.3.3)
       activesupport (>= 2.0)
     builder (3.2.2)
-    byebug (8.2.1)
+    byebug (9.0.5)
+    coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.0)
@@ -84,6 +85,7 @@ GEM
       rails (~> 4)
       slim-rails
       to_words (~> 1.1.0)
+    method_source (0.8.2)
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
@@ -91,6 +93,13 @@ GEM
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -145,6 +154,7 @@ GEM
       activesupport (>= 3.1, < 5.0)
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
+    slop (3.6.0)
     spring (1.5.0)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -172,11 +182,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   faraday
   foreman
   megatron
   pg
+  pry-byebug
   rails (~> 4.2.4)
   rspec-rails
   slim-rails
@@ -185,4 +195,4 @@ DEPENDENCIES
   virtus
 
 BUNDLED WITH
-   1.10.6
+   1.12.5

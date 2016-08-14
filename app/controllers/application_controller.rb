@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :create_fake_session
 
+  rescue_from Errors::NotFound, with: :deployment_not_found
+
   helper_method :current_account, :current_deployment
 
   private
@@ -18,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def create_fake_session
     session[:account_id] = 1337
+  end
+
+  def deployment_not_found
+    render status: :not_found
   end
 
 end
