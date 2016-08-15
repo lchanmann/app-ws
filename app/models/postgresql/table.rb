@@ -13,10 +13,15 @@ class PostgreSQL::Table
       SELECT 
         column_name, data_type
       FROM information_schema.columns
-      WHERE table_name = '#{name}';
+      WHERE table_name = '#{sanitized_name}';
     eos
     )
     raise Errors::NotFound, "Table not found." if result.count == 0
     result.map { |row| OpenStruct.new name: row['column_name'], datatype: row['data_type'] }
   end
+
+  private
+    def sanitized_name
+      name.gsub "'", "''"
+    end
 end

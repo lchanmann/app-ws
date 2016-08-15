@@ -24,6 +24,15 @@ RSpec.describe PostgreSQL::Table do
         expect(subject.datatype).to eq("integer")
       end
     end
+
+    context 'malicious table name' do
+      let(:table) { PostgreSQL::Table.new name: "foo' or 1=1; --" }
+
+      it "should sanitize table name" do
+        expect(client).to receive(:exec).with(/WHERE table_name = 'foo'' or 1=1; --'/).and_return([{}])
+        subject
+      end
+    end
   end
 
 end
