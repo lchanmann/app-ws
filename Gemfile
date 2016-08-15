@@ -9,6 +9,7 @@ gem 'foreman'
 gem 'pg'
 
 # Views and assets
+gem 'jquery-rails'
 gem 'turbolinks'
 gem 'megatron'
 gem 'slim-rails'
