@@ -6,6 +6,7 @@ class PostgreSQL::Table
 
   attribute :name, String
   attribute :schema, String
+  attribute :rows_count, Integer
 
   delegate :client, to: :database
 
@@ -21,6 +22,13 @@ class PostgreSQL::Table
     )
     raise Errors::NotFound, "Table not found." if result.count == 0
     result.map { |row| OpenStruct.new name: row['column_name'], datatype: row['data_type'] }
+  end
+
+  def data
+    result = client.exec(<<-eos
+      SELECT * FROM "#{sanitized_schema}"."#{sanitized_name}";
+    eos
+    )
   end
 
   #

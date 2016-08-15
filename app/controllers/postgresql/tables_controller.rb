@@ -8,4 +8,8 @@ class PostgreSQL::TablesController < PostgreSQL::BaseController
     render locals: {columns: current_table.columns}
   end
 
+  def data
+    render locals: {data: current_table.data}
+  end
+
 end

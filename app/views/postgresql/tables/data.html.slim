@@ -1,0 +1,17 @@
+= render partial: 'postgresql/databases/header'
+= render partial: 'postgresql/tables/nav'
+
+- field_indexes = 0...data.fields.size
+- main_header 'Data'
+
+- main
+  .wide
+    .box-table
+      .table-head
+        .table-row
+          - data.fields.each do |field|
+              .table-cell = field
+      - data.values.each do |row|
+        .table-row
+          - field_indexes.each do |index|
+            .table-cell = row[index]

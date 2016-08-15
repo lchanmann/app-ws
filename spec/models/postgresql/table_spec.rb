@@ -59,4 +59,18 @@ RSpec.describe PostgreSQL::Table, stub_api: true do
   end
 
   it { expect{table.oops}.to raise_error(NoMethodError) }
+
+  describe '#data' do
+    before do
+      database.client.exec(<<-eos
+        INSERT INTO public.tbl_1 (column_1)
+        VALUES
+          (1), (2), (3), (4), (5);
+        eos
+        )
+    end
+    after { database.client.exec "TRUNCATE public.tbl_1;"  }
+    it { expect(table.data.count).to eq(5) }
+    it { expect(table.data[0]['column_1']).to eq(1.to_s) }
+  end
 end

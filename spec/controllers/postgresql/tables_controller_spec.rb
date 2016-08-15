@@ -33,4 +33,11 @@ RSpec.describe PostgreSQL::TablesController, type: :controller do
     end
   end
 
+  describe 'GET data', stub_api: true do
+    it "response status should eq 200" do
+      get :data, account_slug: 'nice-co', deployment_id: $deployment_id, database_name: 'postgres', table_name: 'tbl_1'
+      expect(response.status).to eq(200)
+    end
+  end
+
 end
