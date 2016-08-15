@@ -10,14 +10,14 @@ RSpec.describe PostgreSQL::TablesController, type: :controller do
 
     describe 'display link to show action', stub_api: true do
       render_views
-      before { get :index, account_slug: 'nice-co', deployment_id: $deployment_id, database_name: 'booktown_test' }
+      before { get :index, account_slug: 'nice-co', deployment_id: $deployment_id, database_name: 'postgres' }
       it { expect(response.body).to match /#{postgresql_database_table_path(table_name: 'tbl_1')}/ }
     end
   end
 
   describe 'GET show', stub_api: true do
     context 'valid database and table name' do
-      before { get :show, account_slug: 'nice-co', deployment_id: $deployment_id, database_name: 'booktown_test', table_name: 'tbl_1' }
+      before { get :show, account_slug: 'nice-co', deployment_id: $deployment_id, database_name: 'postgres', table_name: 'tbl_1' }
       it { expect(response.status).to eq(200) }
 
       describe 'display column info' do
