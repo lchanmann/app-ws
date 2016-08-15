@@ -26,6 +26,11 @@ RSpec.describe PostgreSQL::TablesController, type: :controller do
         it { expect(response.body).to match /integer/ }
       end
     end
+
+    context 'inexistence table' do
+      before { get :show, account_slug: 'nice-co', deployment_id: $deployment_id, database_name: 'postgres', table_name: 'hello' }
+      include_examples "raise Errors::NotFound", "Table not found."
+    end
   end
 
 end
