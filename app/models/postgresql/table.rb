@@ -5,6 +5,7 @@ class PostgreSQL::Table
   attribute :deployment, PostgreSQL::Deployment
 
   attribute :name, String
+  attribute :schema, String
 
   delegate :client, to: :database
 
@@ -13,7 +14,9 @@ class PostgreSQL::Table
       SELECT 
         column_name, data_type
       FROM information_schema.columns
-      WHERE table_name = '#{sanitized_name}';
+      WHERE 
+        table_name = '#{sanitized_name}' AND
+        table_schema = '#{schema}';
     eos
     )
     raise Errors::NotFound, "Table not found." if result.count == 0

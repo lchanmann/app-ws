@@ -3,5 +3,6 @@ seed:
 	psql -p 6432 -f booktown.sql postgres `whoami`
 
 db_test_prepare:
+	echo "GRANT CREATE ON DATABASE postgres TO postgres;" | psql -p 6432 `whoami` -d postgres
 	psql -p 6432 -f db/test_prepare.sql postgres `whoami`
 
