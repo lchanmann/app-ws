@@ -24,12 +24,12 @@ RSpec.describe PostgreSQL::Table, stub_api: true do
     end
 
     context 'inexistence table' do
-      let(:table) { PostgreSQL::Table.new name: "foo' or 1=1; --", database: database }
+      let(:table) { PostgreSQL::Table.new name: "hello", schema: "public", database: database }
       it { expect{table.columns}.to raise_error(Errors::NotFound, "Table not found.") }
     end
 
     context 'malicious table name' do
-      let(:table) { PostgreSQL::Table.new name: "foo' or 1=1; --", database: database }
+      let(:table) { PostgreSQL::Table.new name: "foo' or 1=1; --", schema: "public", database: database }
 
       it "should prevent hijacking" do
         expect{table.columns}.to raise_error(Errors::NotFound, "Table not found.")
