@@ -11,6 +11,7 @@ class PostgreSQL::Database
 
   def tables
     client.exec(<<-eos
+      ANALYZE; 
       SELECT 
         nspname AS schemaname,relname,reltuples
       FROM pg_class C
