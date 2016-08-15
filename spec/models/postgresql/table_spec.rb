@@ -57,4 +57,6 @@ RSpec.describe PostgreSQL::Table, stub_api: true do
     it { expect{table.sanitized_what}.to raise_error(NoMethodError, "undefined attribute `what' for PostgreSQL::Table") }
     it { expect(table.sanitized_database).to be_nil }
   end
+
+  it { expect{table.oops}.to raise_error(NoMethodError) }
 end

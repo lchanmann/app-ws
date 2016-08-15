@@ -34,6 +34,8 @@ class PostgreSQL::Table
 
       # TODO: can also raise here when the attribute is not a String
       send($1).try(:gsub, "'", "''")
+    else
+      super
     end
   end
 end
