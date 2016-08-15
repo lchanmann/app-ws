@@ -1,6 +1,6 @@
 class PostgreSQL::BaseController < ApplicationController
 
-  helper_method :current_database
+  helper_method :current_database, :current_table
 
   def current_database
     return nil unless params[:database_name]
