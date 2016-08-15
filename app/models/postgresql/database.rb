@@ -21,7 +21,12 @@ class PostgreSQL::Database
       ORDER BY reltuples DESC;
     eos
     ).map do |row|
-      PostgreSQL::Table.new(name: row['relname'], rows_count: row['reltuples'], database: self, deployment: deployment)
+      PostgreSQL::Table.new(
+        name: row['relname'],
+        schema: row['schemaname'],
+        rows_count: row['reltuples'],
+        database: self,
+        deployment: deployment)
     end
   end
 

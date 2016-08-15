@@ -9,7 +9,7 @@ class PostgreSQL::BaseController < ApplicationController
 
   def current_table
     return nil unless params[:table_name]
-    PostgreSQL::Table.new(name: params[:table_name], database: current_database, deployment: current_deployment)
+    PostgreSQL::Table.new(name: params[:table_name], schema: params[:schema] || "public", database: current_database, deployment: current_deployment)
   end
 
 end

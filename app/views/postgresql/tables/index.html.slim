@@ -11,4 +11,4 @@
           .table-cell name
       - tables.each do |table|
         .table-row
-          .table-cell = link_to table.name, postgresql_database_table_path(table_name: table.name)
+          .table-cell = link_to table.name, postgresql_database_table_path(table_name: table.name, schema: table.schema)
