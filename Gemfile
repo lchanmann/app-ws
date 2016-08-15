@@ -12,6 +12,7 @@ gem 'pg'
 gem 'turbolinks'
 gem 'megatron'
 gem 'slim-rails'
+gem 'coderay'
 
 # Modeling
 gem 'faraday'

@@ -191,6 +191,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  coderay
   faraday
   foreman
   megatron
