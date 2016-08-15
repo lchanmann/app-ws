@@ -23,4 +23,15 @@ class PostgreSQL::Deployment < Deployment
     end
   end
 
+  def current_queries
+    client.exec(<<-eos
+      SELECT 
+        pid, query
+      FROM pg_stat_activity
+      WHERE query NOT LIKE '%FROM pg_stat_activity%'
+      ORDER BY pid DESC;
+    eos
+    ).map { |row| OpenStruct.new row }
+  end
+
 end

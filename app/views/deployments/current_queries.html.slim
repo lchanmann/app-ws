@@ -1,0 +1,13 @@
+= render partial: 'postgresql/deployments/header'
+= render partial: 'postgresql/deployments/nav'
+
+- main_header 'Current quries'
+
+- main
+  .wide
+    .box-table
+      .table-head
+        .table-row
+          .table-cell pid
+          .table-cell query
+      = render partial: "query", collection: @queries
