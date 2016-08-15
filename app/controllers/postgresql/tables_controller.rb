@@ -4,4 +4,8 @@ class PostgreSQL::TablesController < PostgreSQL::BaseController
     render locals: {tables: current_database.tables}
   end
 
+  def show
+    render locals: {columns: current_table.columns}
+  end
+
 end

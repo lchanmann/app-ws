@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :create_fake_session
 
-  rescue_from Errors::NotFound, with: :deployment_not_found
+  rescue_from Errors::NotFound, with: :not_found_error
 
   helper_method :current_account, :current_deployment
 
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     session[:account_id] = 1337
   end
 
-  def deployment_not_found exception
+  def not_found_error exception
     render "errors/not_found", layout: 'megatron/errors',
       locals: { message: exception.message },
       status: :not_found
