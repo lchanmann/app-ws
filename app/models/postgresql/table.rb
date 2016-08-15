@@ -16,15 +16,24 @@ class PostgreSQL::Table
       FROM information_schema.columns
       WHERE 
         table_name = '#{sanitized_name}' AND
-        table_schema = '#{schema}';
+        table_schema = '#{sanitized_schema}';
     eos
     )
     raise Errors::NotFound, "Table not found." if result.count == 0
     result.map { |row| OpenStruct.new name: row['column_name'], datatype: row['data_type'] }
   end
 
-  private
-    def sanitized_name
-      name.gsub "'", "''"
+  #
+  # Dynamically defined methods
+  #
+  def method_missing method, *args, &block
+    # sanitized_{attribute}
+    if method =~ /^sanitized_(\w+)$/
+      raise NoMethodError, "undefined attribute `#{$1}' for #{self.class}" \
+        unless attributes.keys.include? $1.to_sym
+
+      # TODO: can also raise here when the attribute is not a String
+      send($1).try(:gsub, "'", "''")
     end
+  end
 end
