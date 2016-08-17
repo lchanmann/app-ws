@@ -7,6 +7,7 @@ $(function() {
       if ($('.queries').length > 0) {
         $.ajax({
           url: window.location.href,
+          cache :true,
           dataType: 'script'});
       }
     }
