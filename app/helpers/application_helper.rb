@@ -1,5 +1,5 @@
 module ApplicationHelper
   def coderay text, lang = :sql
-    CodeRay.scan(text, lang).div.html_safe
+    sanitize CodeRay.scan(text, lang).div, tags: %w(div span pre)
   end
 end
